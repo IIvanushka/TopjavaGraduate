@@ -2,8 +2,8 @@ package ru.graduation.votingSystem.model;
 
 import javax.persistence.*;
 
-@Entity
-
+@MappedSuperclass
+@Access(AccessType.FIELD)
 public class AbstractBaseEntity {
 
     public static final int START_SEQ = 100000;

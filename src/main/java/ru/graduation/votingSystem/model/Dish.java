@@ -1,9 +1,20 @@
 package ru.graduation.votingSystem.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "dishes")
 public class Dish extends AbstractBaseEntity {
 
+    @Column(name = "lm_id", nullable = false)
+    private Integer lmId;
+
+    @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "price", nullable = false)
     private Double price;
 
     public Dish() {
@@ -28,7 +39,8 @@ public class Dish extends AbstractBaseEntity {
     @Override
     public String toString() {
         return "Dish{" +
-                "name='" + name + '\'' +
+                "lmId=" + lmId +
+                ", name='" + name + '\'' +
                 ", price=" + price +
                 '}';
     }

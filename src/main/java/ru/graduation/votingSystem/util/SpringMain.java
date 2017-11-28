@@ -22,7 +22,7 @@ public class SpringMain {
             userRepo.test().forEach((a, b) -> System.out.println(a + " - " + b));
 
             appRepo = context.getBean(JpaAppRepo.class);
-            appRepo.addRest(new Restaurant("First", "Moskva"));
+//            appRepo.addRest(new Restaurant("Third", "Moskva"));
             System.out.println(appRepo.getRest());
 
         }

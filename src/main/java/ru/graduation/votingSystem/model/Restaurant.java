@@ -16,7 +16,8 @@ public class Restaurant extends AbstractBaseEntity {
 //    @CollectionTable(name = "lunch_menu", joinColumns = @JoinColumn(name = "id_restaurant"))
 //    @Column(name = "lunchMenu")
 //    @ElementCollection(fetch = FetchType.LAZY)
-//    private Set<LunchMenu> lunchMenu;
+    @OneToMany
+    private Set<LunchMenu> lunchMenu;
 
     public Restaurant() {
     }

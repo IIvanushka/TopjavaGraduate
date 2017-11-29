@@ -25,11 +25,14 @@ public class AbstractBaseEntity {
         this.id = id;
     }
 
+    public boolean isNew() {
+        return this.id == null;
+    }
+
     @Override
     public String toString() {
         return String.format("Entity %s (%s)", getClass().getName(), id);
     }
-
 
     @Override
     public boolean equals(Object o) {

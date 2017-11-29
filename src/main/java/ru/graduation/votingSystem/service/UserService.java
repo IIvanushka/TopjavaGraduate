@@ -8,22 +8,21 @@ import ru.graduation.votingSystem.repository.JpaUserRepo;
 import java.util.List;
 
 @Service
-public class AppService {
+public class UserService {
 
     private JpaUserRepo userRepo;
 
     @Autowired
-    public AppService(JpaUserRepo userRepo) {
+    public UserService(JpaUserRepo userRepo) {
         this.userRepo = userRepo;
     }
 
     public User create(User user){
-
         return userRepo.save(user);
     }
 
-    public void delete(int id){
-
+    public boolean delete(int id){
+        return userRepo.delete(id);
     }
 
     public User get(int id){
@@ -34,7 +33,7 @@ public class AppService {
         userRepo.save(user);
     }
 
-    List<User> getAll(){
-        return null;
+    public List<User> getAll(){
+        return userRepo.getAll();
     }
 }

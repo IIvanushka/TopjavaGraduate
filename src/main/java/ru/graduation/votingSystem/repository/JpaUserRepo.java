@@ -6,6 +6,7 @@ import ru.graduation.votingSystem.model.User;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -27,5 +28,15 @@ public class JpaUserRepo {
 
     public User get(int id) {
         return em.find(User.class, id);
+    }
+
+    public boolean delete(int id){
+        return em.createNamedQuery(User.DELETE)
+                .setParameter("id", id)
+                .executeUpdate() != 0;
+    }
+
+    public List<User> getAll() {
+        return em.createNamedQuery(User.ALL_SORTED, User.class).getResultList();
     }
 }

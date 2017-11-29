@@ -4,8 +4,8 @@ DROP TABLE lunch_menu
 IF EXISTS;
 DROP TABLE restaurants
 IF EXISTS;
-DROP TABLE user_roles
-IF EXISTS;
+-- DROP TABLE user_roles
+-- IF EXISTS;
 DROP TABLE users
 IF EXISTS;
 
@@ -24,17 +24,18 @@ CREATE TABLE users
   password   VARCHAR(255)            NOT NULL,
   registered TIMESTAMP DEFAULT now() NOT NULL,
   enabled    BOOLEAN DEFAULT TRUE    NOT NULL,
-  last_vote  TIMESTAMP DEFAULT NULL
+  last_vote  TIMESTAMP DEFAULT NULL,
+  role VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE user_roles
-(
-  user_id INTEGER NOT NULL,
-  role    VARCHAR(255),
-  CONSTRAINT user_roles_idx UNIQUE (user_id, role),
-  FOREIGN KEY (user_id) REFERENCES users (id)
-    ON DELETE CASCADE
-);
+-- CREATE TABLE user_roles
+-- (
+--   user_id INTEGER NOT NULL,
+--   role    VARCHAR(255),
+--   CONSTRAINT user_roles_idx UNIQUE (user_id, role),
+--   FOREIGN KEY (user_id) REFERENCES users (id)
+--     ON DELETE CASCADE
+-- );
 
 
 CREATE TABLE restaurants

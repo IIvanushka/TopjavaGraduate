@@ -2,7 +2,6 @@ package ru.graduation.votingSystem.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @NamedQueries({
         @NamedQuery(name = User.DELETE, query = "DELETE FROM User u WHERE u.id=:id"),
@@ -24,8 +23,9 @@ public class User extends AbstractBaseEntity {
     @Column(name = "EMAIL")
     private String email;
 
-
-//    private UserRoles roles;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ROLE")
+    private UserRoles roles;
 
     @Column(name = "LAST_VOTE")
     private LocalDateTime lastVote;
@@ -49,13 +49,13 @@ public class User extends AbstractBaseEntity {
         this.email = email;
     }
 
-//    public UserRoles getRoles() {
-//        return roles;
-//    }
-//
-//    public void setRoles(UserRoles role) {
-//        this.roles = role;
-//    }
+    public UserRoles getRoles() {
+        return roles;
+    }
+
+    public void setRoles(UserRoles role) {
+        this.roles = role;
+    }
 
     public LocalDateTime getLastVote() {
         return lastVote;
@@ -70,7 +70,7 @@ public class User extends AbstractBaseEntity {
         return "User{" +
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
-//                ", role=" + roles +
+                ", role=" + roles +
                 ", lastVote=" + lastVote +
                 '}';
     }

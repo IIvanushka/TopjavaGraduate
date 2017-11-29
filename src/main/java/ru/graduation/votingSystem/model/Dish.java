@@ -14,9 +14,7 @@ public class Dish extends AbstractBaseEntity {
     public static final String DELETE = "Dish.delete";
     public static final String ALL_SORTED = "Dish.getAllSorted";
 
-//    @ManyToOne(fetch = FetchType.EAGER)
-    @CollectionTable(name = "LUNCH_MENU", joinColumns = @JoinColumn(name = "ID"))
-    @Column(name = "id_lunchmenu")
+    @Column(name = "ID_LUNCH_MENU")
     private Integer idLunchmenu;
 
     @Column(name = "name", nullable = false)
@@ -26,6 +24,12 @@ public class Dish extends AbstractBaseEntity {
     private Double price;
 
     public Dish() {
+    }
+
+    public Dish(Integer idLunchmenu, String name, Double price) {
+        this.idLunchmenu = idLunchmenu;
+        this.name = name;
+        this.price = price;
     }
 
     public String getName() {
@@ -44,10 +48,18 @@ public class Dish extends AbstractBaseEntity {
         this.price = price;
     }
 
+    public Integer getIdLunchmenu() {
+        return idLunchmenu;
+    }
+
+    public void setIdLunchmenu(Integer idLunchmenu) {
+        this.idLunchmenu = idLunchmenu;
+    }
+
     @Override
     public String toString() {
         return "Dish{" +
-//                "lmId=" + lmId +
+                "idLunchmenu=" + idLunchmenu +
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 '}';

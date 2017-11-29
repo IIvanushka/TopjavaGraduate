@@ -16,35 +16,38 @@ public class LunchMenu extends AbstractBaseEntity {
     public static final String DELETE = "LunchMenu.delete";
     public static final String ALL_SORTED = "LunchMenu.getAllSorted";
 
-    @Column(name = "id_restaurant", nullable = false)
-    private Integer idRestaurant;
+    @Column(name = "id_rest", nullable = false)
+    private Integer idRest;
 
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
-    @Column(name = "vote", nullable = false)
+    @Column(name = "votes", nullable = false)
     private Integer vote;
 
-//    @Enumerated(EnumType.STRING)
-//    @CollectionTable(name = "dishes", joinColumns = @JoinColumn(name = "ID"))
-//    @Column(name = "ID")
-//    @ElementCollection(fetch = FetchType.LAZY)
     @OneToMany
+    @JoinColumn(name = "ID_LUNCH_MENU", referencedColumnName = "ID")
     private Set<Dish> dishes;
 
     public LunchMenu() {
     }
 
-    public void incVote(){
+    public LunchMenu(Integer idRest, LocalDate date) {
+        this.idRest = idRest;
+        this.date = date;
+        this.vote = 0;
+    }
+
+    public void incVote() {
         vote++;
     }
 
-    public Integer getIdRestaurant() {
-        return idRestaurant;
+    public Integer getIdRest() {
+        return idRest;
     }
 
-    public void setIdRestaurant(Integer idRestaurant) {
-        this.idRestaurant = idRestaurant;
+    public void setIdRest(Integer idRestaurant) {
+        this.idRest = idRestaurant;
     }
 
     public LocalDate getDate() {
@@ -66,9 +69,10 @@ public class LunchMenu extends AbstractBaseEntity {
     @Override
     public String toString() {
         return "LunchMenu{" +
-                "idRestaurant=" + idRestaurant +
+                "idRestaurant=" + idRest +
                 ", date=" + date +
-//                ", dishes=" + dishes +
+                ", vote=" + vote +
+                ", dishes=" + dishes +
                 '}';
     }
 }

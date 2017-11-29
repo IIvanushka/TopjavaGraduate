@@ -21,10 +21,8 @@ public class Restaurant extends AbstractBaseEntity {
     @Column(name = "address")
     private String address;
 
-//    @CollectionTable(name = "lunch_menu", joinColumns = @JoinColumn(name = "id_restaurant"))
-//    @Column(name = "lunchMenu")
-//    @ElementCollection(fetch = FetchType.LAZY)
     @OneToMany
+    @JoinColumn(name = "ID_REST", referencedColumnName = "ID")
     private Set<LunchMenu> lunchMenu;
 
     public Restaurant() {
@@ -51,19 +49,20 @@ public class Restaurant extends AbstractBaseEntity {
         this.address = address;
     }
 
-//    public Set<LunchMenu> getLunchMenu() {
-//        return lunchMenu;
-//    }
-//
-//    public void setLunchMenu(Set<LunchMenu> lunchMenu) {
-//        this.lunchMenu = lunchMenu;
-//    }
+    public Set<LunchMenu> getLunchMenu() {
+        return lunchMenu;
+    }
+
+    public void setLunchMenu(Set<LunchMenu> lunchMenu) {
+        this.lunchMenu = lunchMenu;
+    }
 
     @Override
     public String toString() {
         return "Restaurant{" +
                 "name='" + name + '\'' +
                 ", address='" + address + '\'' +
+                ", lunchMenu=" + lunchMenu +
                 '}';
     }
 }

@@ -2,16 +2,19 @@ package ru.graduation.votingSystem.util;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.graduation.votingSystem.model.User;
-import ru.graduation.votingSystem.model.UserRoles;
+import ru.graduation.votingSystem.model.*;
 import ru.graduation.votingSystem.service.UserService;
+import ru.graduation.votingSystem.service.VoteService;
 
+import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SpringMain {
 
     private static UserService userService;
-
+    private static VoteService voteService;
 
 
     public static void main(String[] args) {
@@ -21,20 +24,44 @@ public class SpringMain {
             System.out.println("---------------------------------BEANS---------------------------------");
 
             userService = context.getBean(UserService.class);
+            voteService = context.getBean(VoteService.class);
 
-            User user = new User();
-            user.setName("Vasya");
-            user.setEmail("@yandex.ru");
-            user.setRole(UserRoles.ADMIN);
-            userService.create(user);
-            System.out.println(userService.get(AuthorizedUser.id()));
-            user.setEmail("ya@yandex.ru");
-            User user2 = new User();
-            user2.setName("Vasya");
-            user2.setEmail("ya@yandex.ru");
-            user2.setRole(UserRoles.USER);
-            userService.create(user2);
-            userService.getAll().forEach(System.out::println);
+            Restaurant restaurant = new Restaurant("Name", "Address");
+            restaurant.setId(AbstractBaseEntity.START_SEQ);
+            LunchMenu lunchMenu = new LunchMenu(restaurant.getId(), LocalDate.now());
+            lunchMenu.setId(AbstractBaseEntity.START_SEQ + 1);
+            Dish dish1 = new Dish(lunchMenu.getId(), "Kotletka", 1000.);
+            Dish dish2 = new Dish(lunchMenu.getId(), "Pyureshka", 250.5);
+
+            Set<Dish> dishSet = new HashSet<>();
+            dishSet.add(dish1);
+            dishSet.add(dish2);
+            lunchMenu.setDishes(dishSet);
+
+            Set<LunchMenu> lunchMenus = new HashSet<>();
+            lunchMenus.add(lunchMenu);
+            restaurant.setLunchMenu(lunchMenus);
+//
+            voteService.vote(lunchMenu);
+            voteService.vote(lunchMenu);
+            voteService.vote(lunchMenu);
+
+            System.out.println(restaurant);
+
+
+//            User user = new User();
+//            user.setName("Vasya");
+//            user.setEmail("@yandex.ru");
+//            user.setRole(UserRoles.ADMIN);
+//            userService.create(user);
+//            System.out.println(userService.get(AuthorizedUser.id()));
+//            user.setEmail("ya@yandex.ru");
+//            User user2 = new User();
+//            user2.setName("Vasya");
+//            user2.setEmail("ya@yandex.ru");
+//            user2.setRole(UserRoles.USER);
+//            userService.create(user2);
+//            userService.getAll().forEach(System.out::println);
 
         }
     }

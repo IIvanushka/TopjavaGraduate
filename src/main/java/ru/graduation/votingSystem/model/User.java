@@ -1,9 +1,8 @@
 package ru.graduation.votingSystem.model;
 
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @NamedQueries({
         @NamedQuery(name = User.DELETE, query = "DELETE FROM User u WHERE u.id=:id"),
@@ -12,18 +11,23 @@ import java.time.LocalDateTime;
 })
 
 @Entity
+@Table(name = "USERS")
 public class User extends AbstractBaseEntity {
 
     public static final String DELETE = "User.delete";
 //    public static final String BY_EMAIL = "User.getByEmail";
     public static final String ALL_SORTED = "User.getAllSorted";
 
+    @Column(name = "NAME")
     private String name;
 
+    @Column(name = "EMAIL")
     private String email;
 
-    private UserRoles role;
 
+//    private UserRoles roles;
+
+    @Column(name = "LAST_VOTE")
     private LocalDateTime lastVote;
 
     public User() {
@@ -45,13 +49,13 @@ public class User extends AbstractBaseEntity {
         this.email = email;
     }
 
-    public UserRoles getRole() {
-        return role;
-    }
-
-    public void setRole(UserRoles role) {
-        this.role = role;
-    }
+//    public UserRoles getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(UserRoles role) {
+//        this.roles = role;
+//    }
 
     public LocalDateTime getLastVote() {
         return lastVote;
@@ -66,7 +70,7 @@ public class User extends AbstractBaseEntity {
         return "User{" +
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", role=" + role +
+//                ", role=" + roles +
                 ", lastVote=" + lastVote +
                 '}';
     }

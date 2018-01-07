@@ -17,8 +17,8 @@ public class User extends AbstractBaseEntity {
     @Column(name = "ROLE")
     private UserRoles roles;
 
-    @Column(name = "LAST_VOTE")
-    private LocalDateTime lastVote;
+    @Column(name = "ID_LM_VOTE")
+    private Integer idLmVote;
 
     public User() {
     }
@@ -47,12 +47,12 @@ public class User extends AbstractBaseEntity {
         this.roles = role;
     }
 
-    public LocalDateTime getLastVote() {
-        return lastVote;
+    public Integer getIdLmVote() {
+        return idLmVote;
     }
 
-    public void setLastVote(LocalDateTime lastVote) {
-        this.lastVote = lastVote;
+    public void setIdLmVote(Integer idLmVote) {
+        this.idLmVote = idLmVote;
     }
 
     @Override
@@ -60,8 +60,8 @@ public class User extends AbstractBaseEntity {
         return "User{" +
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", role=" + roles +
-                ", lastVote=" + lastVote +
+                ", roles=" + roles +
+                ", idLmVote=" + idLmVote +
                 '}';
     }
 }

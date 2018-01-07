@@ -24,8 +24,8 @@ CREATE TABLE users
   password   VARCHAR(255)            NOT NULL,
   registered TIMESTAMP DEFAULT now() NOT NULL,
   enabled    BOOLEAN DEFAULT TRUE    NOT NULL,
-  last_vote  TIMESTAMP DEFAULT NULL,
-  role VARCHAR(255) NOT NULL
+  id_lm_vote INTEGER DEFAULT NULL,
+  role       VARCHAR(255)            NOT NULL
 );
 
 CREATE TABLE user_roles

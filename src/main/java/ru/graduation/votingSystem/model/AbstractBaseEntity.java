@@ -1,23 +1,29 @@
 package ru.graduation.votingSystem.model;
 
+import org.springframework.data.domain.Persistable;
+
 import javax.persistence.*;
 
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public class AbstractBaseEntity {
+public abstract class AbstractBaseEntity implements Persistable<Integer> {
 
     public static final int START_SEQ = 100000;
 
     @Id
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
-    @Column(name = "id", nullable = false)
-    private Integer id;
+//    @Column(name = "id", nullable = false)
+    protected Integer id;
 
-    public AbstractBaseEntity() {
+    protected AbstractBaseEntity() {
     }
 
-    public int getId() {
+    protected AbstractBaseEntity(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
         return id;
     }
 

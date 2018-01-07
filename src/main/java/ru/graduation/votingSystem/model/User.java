@@ -3,19 +3,9 @@ package ru.graduation.votingSystem.model;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@NamedQueries({
-        @NamedQuery(name = User.DELETE, query = "DELETE FROM User u WHERE u.id=:id"),
-//        @NamedQuery(name = User.BY_EMAIL, query = "SELECT u FROM User u LEFT JOIN FETCH u.roles WHERE u.email=?1"),
-        @NamedQuery(name = User.ALL_SORTED, query = "SELECT u FROM User u ORDER BY u.name, u.email"),
-})
-
 @Entity
-@Table(name = "USERS")
+@Table(name = "users")
 public class User extends AbstractBaseEntity {
-
-    public static final String DELETE = "User.delete";
-//    public static final String BY_EMAIL = "User.getByEmail";
-    public static final String ALL_SORTED = "User.getAllSorted";
 
     @Column(name = "NAME")
     private String name;

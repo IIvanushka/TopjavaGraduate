@@ -2,17 +2,9 @@ package ru.graduation.votingSystem.model;
 
 import javax.persistence.*;
 
-@NamedQueries({
-        @NamedQuery(name = Dish.DELETE, query = "DELETE FROM Dish d WHERE d.id=:id"),
-        @NamedQuery(name = Dish.ALL_SORTED, query = "SELECT d FROM Dish d ORDER BY d.name"),
-})
-
 @Entity
 @Table(name = "dishes")
 public class Dish extends AbstractBaseEntity {
-
-    public static final String DELETE = "Dish.delete";
-    public static final String ALL_SORTED = "Dish.getAllSorted";
 
     @Column(name = "ID_LUNCH_MENU")
     private Integer idLunchmenu;

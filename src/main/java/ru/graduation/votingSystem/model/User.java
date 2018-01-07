@@ -1,7 +1,9 @@
 package ru.graduation.votingSystem.model;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -11,7 +13,12 @@ public class User extends AbstractBaseEntity {
     private String name;
 
     @Column(name = "EMAIL")
+    @Email
     private String email;
+
+    @Column(name = "password")
+    @Size(min = 5, max = 64)
+    private String password;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "ROLE")
@@ -39,6 +46,14 @@ public class User extends AbstractBaseEntity {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public UserRoles getRoles() {
         return roles;
     }
@@ -55,6 +70,13 @@ public class User extends AbstractBaseEntity {
         this.idLmVote = idLmVote;
     }
 
+    public UserRoles getAdminRole() {
+        if (roles.equals(UserRoles.ADMIN)) {
+            return UserRoles.ADMIN;
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -62,6 +84,24 @@ public class User extends AbstractBaseEntity {
                 ", email='" + email + '\'' +
                 ", roles=" + roles +
                 ", idLmVote=" + idLmVote +
+                ", id=" + id +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        User user = (User) o;
+        return Objects.equals(name, user.name) &&
+                Objects.equals(email, user.email) &&
+                roles == user.roles;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), name, email, roles);
     }
 }

@@ -17,7 +17,7 @@ public class LunchMenu extends AbstractBaseEntity {
     @Column(name = "votes", nullable = false)
     private Integer vote;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_LUNCH_MENU", referencedColumnName = "ID")
     private Set<Dish> dishes;
 
@@ -32,6 +32,10 @@ public class LunchMenu extends AbstractBaseEntity {
 
     public void incVote() {
         vote++;
+    }
+
+    public void decVote() {
+        vote--;
     }
 
     public Integer getIdRest() {
@@ -52,6 +56,14 @@ public class LunchMenu extends AbstractBaseEntity {
 
     public Set<Dish> getDishes() {
         return dishes;
+    }
+
+    public Integer getVote() {
+        return vote;
+    }
+
+    public void setVote(Integer vote) {
+        this.vote = vote;
     }
 
     public void setDishes(Set<Dish> dishes) {

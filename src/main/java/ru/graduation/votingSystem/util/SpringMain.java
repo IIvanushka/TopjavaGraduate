@@ -75,7 +75,7 @@ public class SpringMain {
 //            user2.setEmail("ya@yandex.ru");
 //            user2.setRole(UserRoles.USER);
 //            userService.create(user2);
-//            userService.getAll().forEach(System.out::println);
+//            userService.getAllUsers().forEach(System.out::println);
 
         }
     }

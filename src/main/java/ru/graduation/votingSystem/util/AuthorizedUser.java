@@ -7,7 +7,7 @@ public class AuthorizedUser {
     private static int id = AbstractBaseEntity.START_SEQ;
     private static UserRoles role = UserRoles.ADMIN;
 
-    public static int id() {
+    public static int getId() {
         return id;
     }
 
